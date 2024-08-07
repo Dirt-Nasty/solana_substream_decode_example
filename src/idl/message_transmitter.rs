@@ -13,7 +13,6 @@ pub trait Instruction: Sized {
     }
 }
 
-// Assuming SendMessage implements Default
 impl Instruction for message_transmitter::instruction::SendMessage {
     fn match_log(data: &Vec<u8>) -> bool {
         data.starts_with(&Self::DISCRIMINATOR)
