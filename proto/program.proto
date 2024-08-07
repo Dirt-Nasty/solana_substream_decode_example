@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package program.v1;
+
+message Instructions {
+    repeated MessageTransmitter_SendMessage message_transmitter_send_messages = 1;
+    repeated MessageTransmitter_SendMessageWithCaller message_transmitter_send_message_with_callers = 2;
+    repeated MessageTransmitter_ReceiveMessage message_transmitter_receive_messages = 3;
+}
+
+message MessageTransmitter_SendMessage {
+    string evt_tx_hash = 1;
+    uint32 evt_index = 2;
+    google.protobuf.Timestamp evt_block_time = 3;
+    uint64 evt_block_number = 4;
+    string tx_gas_fee = 5;
+    string tx_caller = 6;
+    uint32 destination_domain = 7;
+    bytes recipient = 8;
+    bytes message_body = 9;
+}
+
+message MessageTransmitter_SendMessageWithCaller {
+    string evt_tx_hash = 1;
+    uint32 evt_index = 2;
+    google.protobuf.Timestamp evt_block_time = 3;
+    uint64 evt_block_number = 4;
+    string tx_gas_fee = 5;
+    string tx_caller = 6;
+    uint32 destination_domain = 7;
+    bytes recipient = 8;
+    bytes message_body = 9;
+    bytes destination_caller = 10;
+}
+
+message MessageTransmitter_ReceiveMessage {
+    string evt_tx_hash = 1;
+    uint32 evt_index = 2;
+    google.protobuf.Timestamp evt_block_time = 3;
+    uint64 evt_block_number = 4;
+    string tx_gas_fee = 5;
+    string tx_caller = 6;
+    bytes message = 7;
+    bytes attestation = 8;
+}

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package messages.v1;
+
+enum MessageType {
+    Sent = 0;
+    Recieved = 1;
+}
+
+message Message {
+    MessageType message_type = 1;
+    string tx_hash = 2;
+    google.protobuf.Timestamp block_time = 3;
+    uint64 block_number = 4;
+    string caller = 5;
+    uint64 source_domain = 6;
+    uint64 destination_domain = 7;
+    uint64 nonce = 8;
+    string sender = 9;
+    bytes raw_message_body = 10;
+    MessageBody decoded_message_body = 11;
+    string tx_fee = 12;
+    string tx_caller = 13;
+}
+
+message MessageBody {
+    uint32 version = 1;
+    string burn_token = 2;
+    string mint_recipient = 3;
+    string amount = 4;
+    string message_sender = 5;
+}
+
+message Messages {
+    repeated Message Messages = 1;
+}
